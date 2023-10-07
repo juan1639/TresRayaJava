@@ -87,7 +87,8 @@ public class Tablero extends JFrame {
 			
 		} else {
 			enJuego = false;
-			GameOver.game_over(empate, tresRaya);
+			GameOver gameover = new GameOver(empate, tresRaya);
+			//GameOver.game_over(empate, tresRaya);
 		}
 	}
 	
@@ -120,7 +121,8 @@ public class Tablero extends JFrame {
 			
 		} else {
 			enJuego = false;
-			GameOver.game_over(empate, tresRaya);
+			GameOver gameover = new GameOver(empate, tresRaya);
+			//GameOver.game_over(empate, tresRaya);
 		}
 	}
 	
