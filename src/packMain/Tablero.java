@@ -24,7 +24,7 @@ public class Tablero extends JFrame {
 	public static final String fichaO = "o";
 	
 	public static CasillaXO arrayCasillas[] = new CasillaXO[nro_casillas9];
-	private static JPanel panel;
+	public static JPanel panel;
 	private static boolean enJuego = true;
 	private static boolean turno = true;
 	
@@ -41,15 +41,19 @@ public class Tablero extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		// ------------------------------------------------
+		crearPanel();
 		iniciarComponentes();
 	}
 	
-	public void iniciarComponentes() {
+	public void crearPanel() {
 		
 		panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(Color.DARK_GRAY);
 		this.getContentPane().add(panel);
+	}
+	
+	public static void iniciarComponentes() {
 		
 		int i = 0;
 		
@@ -96,13 +100,66 @@ public class Tablero extends JFrame {
 		
 		if (!enJuego) return;
 		
-		int numero_rnd;
+		// CPU checkea SI tiene la posibilidad de Ganar directo ----------
+		boolean posiblidadGanar = false;
+		int i;
 		
-		do {
-			numero_rnd = (int) (Math.random() * 9);
+		for (i = 0; i < nro_casillas9; i ++) {
 			
-		} while (arrayCasillas[numero_rnd].getValor() != null);
+			if (arrayCasillas[i].getValor() == null) {
+				
+				arrayCasillas[i].setValor(fichaO);
+				
+				posiblidadGanar = CheckGanador.check_tresRaya(fichaO);
+				
+				if (posiblidadGanar) {
+					break;
+				}
+				
+				arrayCasillas[i].setValor(null);
+			}
+		}
 		
+		// Asignamos el indice como TIRADA (si posibilidadGanar = True)---
+		int numero_rnd = i;
+		
+		// SI NO hay posibilidadGanar directo, checkeamos SI defender ----
+		boolean defender = false;
+		
+		if (!posiblidadGanar) {
+			
+			for (i = 0; i < nro_casillas9; i ++) {
+				
+				if (arrayCasillas[i].getValor() == null) {
+					
+					arrayCasillas[i].setValor(fichaX);
+					
+					defender = CheckGanador.check_tresRaya(fichaX);
+					
+					if (defender) {
+						arrayCasillas[i].setValor(null);
+						break;
+					}
+					
+					arrayCasillas[i].setValor(null);
+				}
+			}
+			
+			numero_rnd = i;
+			
+			// Finalmente, SI no hay que defender, se tira Aleatorio -----
+			if (!defender) {
+				
+				do {
+					numero_rnd = (int) (Math.random() * 9);
+					
+				} while (arrayCasillas[numero_rnd].getValor() != null);
+			}
+		}
+		
+		// ---------------------------------------------------------------
+		// LLegados hasta aqui, ya tenemos RESUELTO "numero_rnd"
+		// ---------------------------------------------------------------
 		CasillaXO tiradaCpu = arrayCasillas[numero_rnd];
 		panel.remove(tiradaCpu.getCasillaBoton());
 		
@@ -126,6 +183,7 @@ public class Tablero extends JFrame {
 		}
 	}
 	
+	// -------------------------------------------------------------------
 	public static int getFila(int indice) {
 		
 		int fila = (int) (indice / filas);
@@ -137,5 +195,22 @@ public class Tablero extends JFrame {
 		int columna = (int) (indice / filas);
 		columna = indice - (columna * columnas);
 		return columna;
+	}
+	
+	// Getters & Setters ------------------------------------------------
+	public static boolean isEnJuego() {
+		return enJuego;
+	}
+
+	public static void setEnJuego(boolean enJuego) {
+		Tablero.enJuego = enJuego;
+	}
+
+	public static boolean isTurno() {
+		return turno;
+	}
+
+	public static void setTurno(boolean turno) {
+		Tablero.turno = turno;
 	}
 }

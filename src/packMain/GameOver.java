@@ -3,8 +3,9 @@ package packMain;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -41,6 +42,7 @@ public class GameOver extends JFrame {
 		// ------------------------------------------------
 		etiquetaMsgGO(game_over(empate, tresRaya, ganador));
 		botonNewGame();
+		botonNG.addMouseListener(eventoRatonNewGame());
 	}
 	
 	public static void etiquetaMsgGO(String txt) {
@@ -90,5 +92,51 @@ public class GameOver extends JFrame {
 		}
 		
 		return txt;
+	}
+	
+	public MouseListener eventoRatonNewGame() {
+		
+		MouseListener newGame = new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+				dispose();
+				
+				Tablero.panel.removeAll();
+				Tablero.iniciarComponentes();
+				Tablero.panel.repaint();
+				
+				Tablero.setTurno(true);
+				Tablero.setEnJuego(true);
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+		
+		return newGame;
 	}
 }
