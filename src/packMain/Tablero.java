@@ -25,11 +25,16 @@ public class Tablero extends JFrame {
 	
 	public static CasillaXO arrayCasillas[] = new CasillaXO[nro_casillas9];
 	public static JPanel panel;
+	
+	private static boolean save_quien_comienza;
 	private static boolean enJuego = true;
-	private static boolean turno = true;
+	private static boolean turno;
 	
 	// ------------------------------------------------------------------
-	public Tablero() {
+	public Tablero(boolean turno, boolean quien_comienza) {
+		
+		this.turno = turno;
+		this.save_quien_comienza = quien_comienza;
 		
 		setSize((int) resX, (int) resY);
 		setTitle(" TRES en RAYA  By Juan Eguia ");
@@ -43,6 +48,10 @@ public class Tablero extends JFrame {
 		// ------------------------------------------------
 		crearPanel();
 		iniciarComponentes();
+		
+		if (!turno) {
+			cpuJugada();
+		}
 	}
 	
 	public void crearPanel() {
@@ -69,9 +78,12 @@ public class Tablero extends JFrame {
 		}
 	}
 	
+	// ---------------------------------------------------------------------
 	public static void realizarJugada(int indice, int fila, int columna) {
 		
 		if (!turno || !enJuego) return;
+		
+		if (arrayCasillas[indice].getValor() != null) return;
 		
 		panel.remove(arrayCasillas[indice].getCasillaBoton());
 		
@@ -96,6 +108,7 @@ public class Tablero extends JFrame {
 		}
 	}
 	
+	// ------------------------------------------------------------------------
 	public static void cpuJugada() {
 		
 		if (!enJuego) return;
@@ -212,5 +225,13 @@ public class Tablero extends JFrame {
 
 	public static void setTurno(boolean turno) {
 		Tablero.turno = turno;
+	}
+
+	public static boolean isSave_quien_comienza() {
+		return save_quien_comienza;
+	}
+
+	public static void setSave_quien_comienza(boolean save_quien_comienza) {
+		Tablero.save_quien_comienza = save_quien_comienza;
 	}
 }

@@ -5,8 +5,8 @@ public class Principal {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		Tablero tablero = new Tablero();
-		tablero.setVisible(true);
+		MenuPrincipal menuP = new MenuPrincipal();
+		menuP.setVisible(true);
 	}
 
 }

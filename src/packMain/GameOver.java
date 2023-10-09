@@ -108,8 +108,12 @@ public class GameOver extends JFrame {
 				Tablero.iniciarComponentes();
 				Tablero.panel.repaint();
 				
-				Tablero.setTurno(true);
+				Tablero.setTurno(Tablero.isSave_quien_comienza());
 				Tablero.setEnJuego(true);
+				
+				if (!Tablero.isSave_quien_comienza()) {
+					Tablero.cpuJugada();
+				}
 			}
 
 			@Override

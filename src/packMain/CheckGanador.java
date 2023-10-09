@@ -1,6 +1,6 @@
 package packMain;
 
-
+// ----------------------------------------------------------------------
 public class CheckGanador {
 	
 	public static boolean check_empate() {
@@ -16,6 +16,7 @@ public class CheckGanador {
 		return true;
 	}
 	
+	// ------------------------------------------------------------------
 	public static boolean check_tresRaya(String xo) {
 		
 		int[][] combiGanadoras = {
