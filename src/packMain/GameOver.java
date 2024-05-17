@@ -23,6 +23,18 @@ public class GameOver extends JFrame {
 	
 	public GameOver(boolean empate, boolean tresRaya, boolean ganador) {
 		
+		settingsGameOver();
+		
+		panel = new JPanel();
+		this.getContentPane().add(panel);
+		
+		etiquetaMsgGO(game_over(empate, tresRaya, ganador));
+		botonNewGame();
+		botonNG.addMouseListener(eventoRatonNewGame());
+	}
+
+	public void settingsGameOver() {
+		
 		setSize((int) goX, (int) goY);
 		setVisible(true);
 		setTitle(" Game Over ");
@@ -32,15 +44,6 @@ public class GameOver extends JFrame {
 		
 		//this.getContentPane().setBackground(Color.BLUE);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-		// ------------------------------------------------
-		panel = new JPanel();
-		this.getContentPane().add(panel);
-		
-		// ------------------------------------------------
-		etiquetaMsgGO(game_over(empate, tresRaya, ganador));
-		botonNewGame();
-		botonNG.addMouseListener(eventoRatonNewGame());
 	}
 	
 	public static void etiquetaMsgGO(String txt) {
@@ -129,13 +132,13 @@ public class GameOver extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				botonNG.setForeground(Color.CYAN);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				botonNG.setForeground(Color.BLUE);
 			}
 		};
 		

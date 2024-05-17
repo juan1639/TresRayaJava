@@ -36,7 +36,9 @@ public class CheckGanador {
 			int dos = combi[1];
 			int tres = combi[2];
 			
-			if (casilla[uno].getValor() == xo && casilla[dos].getValor() == xo && casilla[tres].getValor() == xo) {
+			if (casilla[uno].getValor() == xo && casilla[dos].getValor() == xo
+					&& casilla[tres].getValor() == xo) {
+				
 				System.out.print(" Tres en Raya!! \n");
 				return true;
 			}

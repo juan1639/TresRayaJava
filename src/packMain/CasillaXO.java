@@ -42,7 +42,8 @@ public class CasillaXO {
 		int ancho = (int) Tablero.anchoCasillaBoton;
 		int alto = (int) Tablero.altoCasillaBoton;
 		int fontSize = (int) (alto / 1.1);
-		Color colorFicha = valor == Tablero.fichaX ? new Color(5, 80, 220) : new Color(25, 190, 5);
+		//Color colorFicha = valor == Tablero.fichaX ? new Color(5, 80, 220) : new Color(25, 190, 5);
+		Color colorFicha = valor == Tablero.fichaX ? Settings.azulX : Settings.verdeO;
 		
 		casillaBoton = new JButton();
 		//casillaBoton.setOpaque(true);
@@ -99,7 +100,7 @@ public class CasillaXO {
 		return oyenteRaton;
 	}
 	
-	// Getters & Setters ------------------------------------------
+	// Getters & Setters
 	public String getValor() {
 		return valor;
 	}

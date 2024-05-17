@@ -58,21 +58,22 @@ public class MenuPrincipal extends JFrame {
 		int ancho = (int) ((Settings.tileX * 3) / 1.5);
 		int alto = (int) ((Settings.tileY * 3) / 10);
 
-		crearRadioBoton(" Comienza el Jugador (ficha X) ", true, x, y, ancho, alto, 0);
+		crearRadioBoton(" Comienza el Jugador (ficha X) ", true, x, y, ancho, alto, 0, Settings.azulX);
 		y += (int) (alto * 1.5);
-		crearRadioBoton(" Comienza la CPU  (ficha O) ", false, x, y, ancho, alto, 1);
+		crearRadioBoton(" Comienza la CPU  (ficha O) ", false, x, y, ancho, alto, 1, Settings.verdeO);
 		
 		ButtonGroup grupoRadioBotones = new ButtonGroup();
 		grupoRadioBotones.add(radioBoton[0]);
 		grupoRadioBotones.add(radioBoton[1]);
 	}
 
-	public void crearRadioBoton(String info, Boolean bool, int x, int y, int ancho, int alto, int index) {
+	public void crearRadioBoton(String info, Boolean bool,
+			int x, int y, int ancho, int alto, int index, Color col) {
 		
 		radioBoton[index] = new JRadioButton(info);
 		radioBoton[index].setSelected(bool);
 		radioBoton[index].setFont(new Font("arial", 0, 22));
-		radioBoton[index].setForeground(Color.GRAY);
+		radioBoton[index].setForeground(col);
 		radioBoton[index].setBounds(x, y, ancho, alto);
 		panel.add(radioBoton[index]);
 	}
@@ -85,7 +86,7 @@ public class MenuPrincipal extends JFrame {
 		titulo.setBounds(x, (int) ((Settings.tileY * 3) / 18),
 				(int) ((Settings.tileX * 3) / 1.3), (int) ((Settings.tileY * 3) / 7));
 		
-		titulo.setForeground(Color.BLUE);
+		titulo.setForeground(Color.GRAY);
 		titulo.setFont(new Font("arial", 1, 30));
 		panel.add(titulo);
 	}
@@ -141,7 +142,8 @@ public class MenuPrincipal extends JFrame {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				botonJugar.setForeground(Color.GREEN);
+				//botonJugar.setForeground(Color.GREEN);
+				botonJugar.setForeground(Settings.amarillo);
 				botonJugar.setBackground(Color.BLUE);
 			}
 

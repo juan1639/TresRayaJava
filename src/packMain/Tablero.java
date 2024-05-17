@@ -163,7 +163,7 @@ public class Tablero extends JFrame {
 			if (!defender) {
 				
 				do {
-					numero_rnd = (int) (Math.random() * 9);
+					numero_rnd = (int) (Math.random() * Settings.nro_casillas9);
 					
 				} while (arrayCasillas[numero_rnd].getValor() != null);
 			}
@@ -195,6 +195,7 @@ public class Tablero extends JFrame {
 		}
 	}
 	
+	// Getters & Setters
 	public static int getFila(int indice) {
 		
 		int fila = (int) (indice / filas);

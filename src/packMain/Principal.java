@@ -8,5 +8,4 @@ public class Principal {
 		MenuPrincipal menuP = new MenuPrincipal();
 		menuP.setVisible(true);
 	}
-
 }
