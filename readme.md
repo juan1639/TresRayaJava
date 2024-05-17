@@ -1,5 +1,7 @@
 # Sencillo proyecto del juego TRES EN RAYA (TicTacToe) en Java
 
+<img src="snapShot-tresRayaJava.png" alt="img game"/>
+
 Archivos que componen la carpeta (package) packMain:
 
 <li>CasillaXO.java -> clase donde creamos una casilla X, O, o null (por defecto)</li>
