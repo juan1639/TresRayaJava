@@ -13,22 +13,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-// -------------------------------------------------------------------
 public class MenuPrincipal extends JFrame {
-	
-	private static final double resX = 540;
-	private static final double resY = 540;
 	
 	private boolean quien_comienza = true;
 	private JPanel panel;
 	private JLabel titulo;
-	private JRadioButton radioBoton1;
-	private JRadioButton radioBoton2;
+	private JRadioButton radioBoton[] = new JRadioButton[2];
 	private JButton botonJugar;
 	
 	public MenuPrincipal() {
 		
-		setSize((int) resX, (int) resY);
+		settingsJFrame();
+		crearPanel();
+		crearRadioBoton();
+		crearEtiquetas();
+		crearBotonJugar();
+		botonJugar.addMouseListener(eventoBotonJugar());
+	}
+
+	public void settingsJFrame() {
+		
+		setSize(Settings.tileX * 3, Settings.tileY * 3);
 		setTitle(" TRES en RAYA  Menu Principal");
 		setLocationRelativeTo(null);
 		setResizable(true);
@@ -36,13 +41,6 @@ public class MenuPrincipal extends JFrame {
 		
 		//this.getContentPane().setBackground(Color.BLUE);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-		// ------------------------------------------------
-		crearPanel();
-		crearRadioBoton();
-		crearEtiquetas();
-		crearBotonJugar();
-		botonJugar.addMouseListener(eventoBotonJugar());
 	}
 	
 	public void crearPanel() {
@@ -55,40 +53,40 @@ public class MenuPrincipal extends JFrame {
 	
 	public void crearRadioBoton() {
 		
-		int x = (int) (resX / 8);
-		int y = (int) (resY / 3);
-		int ancho = (int) (resX / 1.5);
-		int alto = (int) (resY / 10);
-		
-		radioBoton1 = new JRadioButton(" Comienza el Jugador ... X ");
-		radioBoton1.setSelected(true);
-		radioBoton1.setFont(new Font("arial", 0, 25));
-		radioBoton1.setForeground(Color.GRAY);
-		radioBoton1.setBounds(x, y, ancho, alto);
-		panel.add(radioBoton1);	
-		
+		int x = (int) ((Settings.tileX * 3) / 8);
+		int y = (int) ((Settings.tileY * 3) / 3);
+		int ancho = (int) ((Settings.tileX * 3) / 1.5);
+		int alto = (int) ((Settings.tileY * 3) / 10);
+
+		crearRadioBoton(" Comienza el Jugador (ficha X) ", true, x, y, ancho, alto, 0);
 		y += (int) (alto * 1.5);
-		
-		radioBoton2 = new JRadioButton(" Comienza la CPU ........ O ");
-		radioBoton2.setSelected(false);
-		radioBoton2.setFont(new Font("arial", 0, 25));
-		radioBoton2.setForeground(Color.GRAY);
-		radioBoton2.setBounds(x, y, ancho, alto);
-		panel.add(radioBoton2);
+		crearRadioBoton(" Comienza la CPU  (ficha O) ", false, x, y, ancho, alto, 1);
 		
 		ButtonGroup grupoRadioBotones = new ButtonGroup();
-		grupoRadioBotones.add(radioBoton1);
-		grupoRadioBotones.add(radioBoton2);
+		grupoRadioBotones.add(radioBoton[0]);
+		grupoRadioBotones.add(radioBoton[1]);
+	}
+
+	public void crearRadioBoton(String info, Boolean bool, int x, int y, int ancho, int alto, int index) {
+		
+		radioBoton[index] = new JRadioButton(info);
+		radioBoton[index].setSelected(bool);
+		radioBoton[index].setFont(new Font("arial", 0, 22));
+		radioBoton[index].setForeground(Color.GRAY);
+		radioBoton[index].setBounds(x, y, ancho, alto);
+		panel.add(radioBoton[index]);
 	}
 	
 	public void crearEtiquetas() {
 		
-		int x = (int) (resX / 10);
+		int x = (int) ((Settings.tileX * 3) / 10);
 		
 		titulo = new JLabel(" Elige quién comienza");
-		titulo.setBounds(x, (int) (resY / 18), (int) (resX / 1.3), (int) (resY / 7));
+		titulo.setBounds(x, (int) ((Settings.tileY * 3) / 18),
+				(int) ((Settings.tileX * 3) / 1.3), (int) ((Settings.tileY * 3) / 7));
+		
 		titulo.setForeground(Color.BLUE);
-		titulo.setFont(new Font("arial", 1, 40));
+		titulo.setFont(new Font("arial", 1, 30));
 		panel.add(titulo);
 	}
 	
@@ -100,7 +98,7 @@ public class MenuPrincipal extends JFrame {
 		//botonNG.setSize((int) (goX / 1.3), (int) (goY / 8));
 		botonJugar.setFocusable(false);
 		//botonNG.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1, true));
-		botonJugar.setBounds((int) (resX / 3), (int) (resY / 1.3), 180, 50);
+		botonJugar.setBounds((int) ((Settings.tileX * 3) / 3), (int) ((Settings.tileY * 3) / 1.3), 180, 50);
 		//botonNG.setOpaque(true);
 		botonJugar.setForeground(Color.BLUE);
 		//botonNG.setBackground(Color.RED);
@@ -117,8 +115,10 @@ public class MenuPrincipal extends JFrame {
 				
 				dispose();
 				
-				if (radioBoton1.isSelected()) {
+				if (radioBoton[0].isSelected()) {
+					
 					quien_comienza = true;
+				
 				} else {
 					quien_comienza = false;
 				}
@@ -130,25 +130,23 @@ public class MenuPrincipal extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				botonJugar.setForeground(Color.GREEN);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				botonJugar.setForeground(Color.BLUE);
 			}
 		};
 		
