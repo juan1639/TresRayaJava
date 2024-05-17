@@ -7,21 +7,20 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-// ----------------------------------------------------------------------
 public class Tablero extends JFrame {
 	
-	public static final double resX = 540;
-	public static final double resY = 540;
+	public static final double resX = Settings.tileX * 3.07;
+	public static final double resY = Settings.tileY * 3.2;
 	
-	public static final double anchoCasillaBoton = resX / 3.1;
-	public static final double altoCasillaBoton = resY / 3.2;
+	public static final double anchoCasillaBoton = Settings.tileX;
+	public static final double altoCasillaBoton = Settings.tileY;
 	
 	public static final int nro_casillas9 = 9;
-	public static final int filas = 3;
-	public static final int columnas = 3;
+	public static final int filas = Settings.filas;
+	public static final int columnas = Settings.columnas;
 	
-	public static final String fichaX = "x";
-	public static final String fichaO = "o";
+	public static final String fichaX = Settings.fichaX;
+	public static final String fichaO = Settings.fichaO;
 	
 	public static CasillaXO arrayCasillas[] = new CasillaXO[nro_casillas9];
 	public static JPanel panel;
@@ -30,11 +29,21 @@ public class Tablero extends JFrame {
 	private static boolean enJuego = true;
 	private static boolean turno;
 	
-	// ------------------------------------------------------------------
-	public Tablero(boolean turno, boolean quien_comienza) {
+	public Tablero(boolean _turno, boolean _quien_comienza) {
 		
-		this.turno = turno;
-		this.save_quien_comienza = quien_comienza;
+		turno = _turno;
+		save_quien_comienza = _quien_comienza;
+		
+		settingsJFrame();
+		crearPanel();
+		iniciarComponentes();
+		
+		if (!turno) {
+			cpuJugada();
+		}
+	}
+
+	public void settingsJFrame() {
 		
 		setSize((int) resX, (int) resY);
 		setTitle(" TRES en RAYA  By Juan Eguia ");
@@ -44,14 +53,6 @@ public class Tablero extends JFrame {
 		
 		//this.getContentPane().setBackground(Color.BLUE);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-		// ------------------------------------------------
-		crearPanel();
-		iniciarComponentes();
-		
-		if (!turno) {
-			cpuJugada();
-		}
 	}
 	
 	public void crearPanel() {
@@ -78,7 +79,6 @@ public class Tablero extends JFrame {
 		}
 	}
 	
-	// ---------------------------------------------------------------------
 	public static void realizarJugada(int indice, int fila, int columna) {
 		
 		if (!turno || !enJuego) return;
@@ -108,7 +108,6 @@ public class Tablero extends JFrame {
 		}
 	}
 	
-	// ------------------------------------------------------------------------
 	public static void cpuJugada() {
 		
 		if (!enJuego) return;
@@ -196,7 +195,6 @@ public class Tablero extends JFrame {
 		}
 	}
 	
-	// -------------------------------------------------------------------
 	public static int getFila(int indice) {
 		
 		int fila = (int) (indice / filas);
@@ -210,7 +208,6 @@ public class Tablero extends JFrame {
 		return columna;
 	}
 	
-	// Getters & Setters ------------------------------------------------
 	public static boolean isEnJuego() {
 		return enJuego;
 	}

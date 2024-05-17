@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-// -----------------------------------------------------------------------------
 public class GameOver extends JFrame {
 	
 	public static final double goX = Tablero.resX / 1.3;
@@ -22,7 +21,6 @@ public class GameOver extends JFrame {
 	private static JLabel etiquetaGO;
 	private static JButton botonNG;
 	
-	// ------------------------------------------------------------------
 	public GameOver(boolean empate, boolean tresRaya, boolean ganador) {
 		
 		setSize((int) goX, (int) goY);

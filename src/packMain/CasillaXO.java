@@ -8,7 +8,6 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
-// -----------------------------------------------------------------
 public class CasillaXO {
 	
 	private String valor;
@@ -17,7 +16,6 @@ public class CasillaXO {
 	private int columna;
 	private JButton casillaBoton;
 	
-	// -------------------------------------------------------------
 	public CasillaXO(String valor, int indice, int fila, int columna) {
 		this.valor = valor;
 		this.indice = indice;
@@ -38,7 +36,7 @@ public class CasillaXO {
 		this.casillaBoton.addMouseListener(eventoRaton());
 	}
 	
-	// ------------------------------------------------------------
+	// Cada casilla es un JButton para que sea "clickable"
 	public JButton crearCasillaBoton() {
 		
 		int ancho = (int) Tablero.anchoCasillaBoton;

@@ -15,7 +15,7 @@ import javax.swing.JRadioButton;
 
 public class MenuPrincipal extends JFrame {
 	
-	private boolean quien_comienza = true;
+	private static boolean quien_comienza = true;
 	private JPanel panel;
 	private JLabel titulo;
 	private JRadioButton radioBoton[] = new JRadioButton[2];
@@ -81,7 +81,7 @@ public class MenuPrincipal extends JFrame {
 		
 		int x = (int) ((Settings.tileX * 3) / 10);
 		
-		titulo = new JLabel(" Elige quién comienza");
+		titulo = new JLabel("Elige quién comienza");
 		titulo.setBounds(x, (int) ((Settings.tileY * 3) / 18),
 				(int) ((Settings.tileX * 3) / 1.3), (int) ((Settings.tileY * 3) / 7));
 		
@@ -101,6 +101,7 @@ public class MenuPrincipal extends JFrame {
 		botonJugar.setBounds((int) ((Settings.tileX * 3) / 3), (int) ((Settings.tileY * 3) / 1.3), 180, 50);
 		//botonNG.setOpaque(true);
 		botonJugar.setForeground(Color.BLUE);
+		botonJugar.setBackground(Color.CYAN);
 		//botonNG.setBackground(Color.RED);
 		panel.add(botonJugar);
 	}
@@ -141,12 +142,14 @@ public class MenuPrincipal extends JFrame {
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
 				botonJugar.setForeground(Color.GREEN);
+				botonJugar.setBackground(Color.BLUE);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
 				botonJugar.setForeground(Color.BLUE);
+				botonJugar.setBackground(Color.CYAN);
 			}
 		};
 		
