@@ -2,19 +2,26 @@
 
 <img src="snapShot-tresRayaJava.png" alt="img game"/>
 
-Archivos que componen la carpeta (package) packMain:
+Packages que componen el proyecto:
 
-<li>CasillaXO.java -> clase donde creamos una casilla X, O, o null (por defecto)</li>
+<li>packmain -> Package principal del proyecto</li>
 
-<li>CheckGanador.java -> clase donde checkeamos si hay un ganador o empate</li>
+Principal.java (método main)
+MenuPrincipal.java (swing con el menu principal)
+GameOver.java (swing con el game over)
+Settings.java (clase con las principales variables y constantes)
 
-<li>GameOver.java -> clase donde se crea la ventana modal al finalizar el juego</li>
+<li>checkwinner -> Package con la clase donde de checkea un posible ganador</li>
 
-<li>MenuPrincipal -> Simplisimo menu de inicio (elegir quien comienza)</li>
+CheckGanador.java
 
-<li>Principal.java -> contiene el método main e instancia el MenuPrincipal</li>
+<li>entidades -> Package con la clase donde se crea la Casilla X/O, incluido el JButton y eventos raton</li>
 
-<li>Tablero.java -> clase que crea el tablero de juego, compuesto por un array
-de 9 casillasXO, y donde están los métodos para hacer nuestras
-jugadas y donde juega también la CPU</li>
+CasillaXO.java
+
+<li>logicajuego -> Package con las clases Tablero donde se gestionan las jugadas (jugador/CPU)</li>
+
+Tablero.java
+RepaintNuevaXO.java
+
 
