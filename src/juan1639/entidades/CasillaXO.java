@@ -1,4 +1,4 @@
-package packMain;
+package juan1639.entidades;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,6 +7,9 @@ import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+
+import juan1639.logicajuego.Tablero;
+import juan1639.packmain.Settings;
 
 public class CasillaXO {
 	
@@ -39,11 +42,11 @@ public class CasillaXO {
 	// Cada casilla es un JButton para que sea "clickable"
 	public JButton crearCasillaBoton() {
 		
-		int ancho = (int) Tablero.anchoCasillaBoton;
-		int alto = (int) Tablero.altoCasillaBoton;
+		int ancho = (int) Tablero.ANCHO_CASILLA_BOTON;
+		int alto = (int) Tablero.ALTO_CASILLA_BOTON;
 		int fontSize = (int) (alto / 1.1);
 		//Color colorFicha = valor == Tablero.fichaX ? new Color(5, 80, 220) : new Color(25, 190, 5);
-		Color colorFicha = valor == Tablero.fichaX ? Settings.azulX : Settings.verdeO;
+		Color colorFicha = valor == Tablero.FICHAX ? Settings.azulX : Settings.verdeO;
 		
 		casillaBoton = new JButton();
 		//casillaBoton.setOpaque(true);
@@ -66,35 +69,22 @@ public class CasillaXO {
 		MouseListener oyenteRaton = new MouseListener() {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
+			public void mouseClicked(MouseEvent e) {}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
 				
 				Tablero.realizarJugada(indice, fila, columna);
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mouseReleased(MouseEvent e) {}
 
 			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mouseEntered(MouseEvent e) {}
 
 			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mouseExited(MouseEvent e) {}
 		};
 		
 		return oyenteRaton;

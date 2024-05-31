@@ -1,4 +1,4 @@
-package packMain;
+package juan1639.packmain;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,10 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import juan1639.logicajuego.Tablero;
+
 public class GameOver extends JFrame {
 	
-	public static final double goX = Tablero.resX / 1.3;
-	public static final double goY = Tablero.resX / 4;
+	public static final double goX = Tablero.RES_X / 1.3;
+	public static final double goY = Tablero.RES_X / 4;
 	
 	private static JPanel panel;
 	private static JLabel etiquetaGO;

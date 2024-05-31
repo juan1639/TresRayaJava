@@ -1,4 +1,4 @@
-package packMain;
+package juan1639.packmain;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+
+import juan1639.logicajuego.Tablero;
 
 public class MenuPrincipal extends JFrame {
 	
@@ -97,7 +99,8 @@ public class MenuPrincipal extends JFrame {
 		botonJugar.setFont(new Font("arial", Font.BOLD, 30));
 		botonJugar.setText(" Jugar ");
 		//botonNG.setSize((int) (goX / 1.3), (int) (goY / 8));
-		botonJugar.setFocusable(false);
+		botonJugar.setFocusable(true);
+		//botonJugar.requestFocus();
 		//botonNG.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1, true));
 		botonJugar.setBounds((int) ((Settings.tileX * 3) / 3), (int) ((Settings.tileY * 3) / 1.3), 180, 50);
 		//botonNG.setOpaque(true);

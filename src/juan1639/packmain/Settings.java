@@ -1,4 +1,4 @@
-package packMain;
+package juan1639.packmain;
 
 import java.awt.Color;
 
@@ -11,8 +11,8 @@ public class Settings {
 	public static final Integer filas = 3;
 	public static final Integer columnas = 3;
 	
-	public static final String fichaX = "x";
-	public static final String fichaO = "o";
+	public static final String FICHA_X = "x";
+	public static final String FICHA_O = "o";
 	
 	public static final Integer nro_casillas9 = 9;
 	

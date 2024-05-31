@@ -1,4 +1,4 @@
-package packMain;
+package juan1639.logicajuego;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,22 +7,27 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import juan1639.checkwinner.CheckGanador;
+import juan1639.entidades.CasillaXO;
+import juan1639.packmain.GameOver;
+import juan1639.packmain.Settings;
+
 public class Tablero extends JFrame {
 	
-	public static final double resX = Settings.tileX * 3.07;
-	public static final double resY = Settings.tileY * 3.2;
+	public static final double RES_X = Settings.tileX * 3.07;
+	public static final double RES_Y = Settings.tileY * 3.2;
 	
-	public static final double anchoCasillaBoton = Settings.tileX;
-	public static final double altoCasillaBoton = Settings.tileY;
+	public static final double ANCHO_CASILLA_BOTON = Settings.tileX;
+	public static final double ALTO_CASILLA_BOTON = Settings.tileY;
 	
-	public static final int nro_casillas9 = 9;
-	public static final int filas = Settings.filas;
-	public static final int columnas = Settings.columnas;
+	public static final int NUM_CASILLAS_9 = 9;
+	public static final int FILAS = Settings.filas;
+	public static final int COLUMNAS = Settings.columnas;
 	
-	public static final String fichaX = Settings.fichaX;
-	public static final String fichaO = Settings.fichaO;
+	public static final String FICHAX = Settings.FICHA_X;
+	public static final String FICHAO = Settings.FICHA_O;
 	
-	public static CasillaXO arrayCasillas[] = new CasillaXO[nro_casillas9];
+	public static CasillaXO arrayCasillas[] = new CasillaXO[NUM_CASILLAS_9];
 	public static JPanel panel;
 	
 	private static boolean save_quien_comienza;
@@ -45,7 +50,7 @@ public class Tablero extends JFrame {
 
 	public void settingsJFrame() {
 		
-		setSize((int) resX, (int) resY);
+		setSize((int) RES_X, (int) RES_Y);
 		setTitle(" TRES en RAYA  By Juan Eguia ");
 		setLocationRelativeTo(null);
 		setResizable(true);
@@ -64,11 +69,11 @@ public class Tablero extends JFrame {
 	}
 	
 	public static void iniciarComponentes() {
-		
+		// Dibujar el Tablero de Juego / Draw GameBoard
 		int i = 0;
 		
-		for (int fila = 0; fila < filas; fila ++) {
-			for (int col = 0; col < columnas; col ++) {
+		for (int fila = 0; fila < FILAS; fila ++) {
+			for (int col = 0; col < COLUMNAS; col ++) {
 				
 				CasillaXO casilla = new CasillaXO(i, fila, col);
 				arrayCasillas[i] = casilla;
@@ -81,21 +86,18 @@ public class Tablero extends JFrame {
 	
 	public static void realizarJugada(int indice, int fila, int columna) {
 		
+		// Si No es Nuestro Turno o Casilla No vacia... return
 		if (!turno || !enJuego) return;
-		
 		if (arrayCasillas[indice].getValor() != null) return;
 		
-		panel.remove(arrayCasillas[indice].getCasillaBoton());
-		
-		arrayCasillas[indice] = new CasillaXO(fichaX, indice, fila, columna);
-		panel.add(arrayCasillas[indice].getCasillaBoton());
-		
-		panel.repaint();
+		// Repintar Casilla y poner nuestra X
+		RepaintNuevaXO.clickNuevaXO(FICHAX, panel, arrayCasillas, indice, fila, columna);
 		
 		System.out.print(indice + " jugada realizada... \n");
 		
+		// Tras realizar jugada... inmediatamente se Checkea un posible Ganador o Empate
 		boolean empate = CheckGanador.check_empate();
-		boolean tresRaya = CheckGanador.check_tresRaya(fichaX);
+		boolean tresRaya = CheckGanador.check_tresRaya(FICHAX);
 		
 		if (!empate && !tresRaya) {
 			turno = false;
@@ -116,13 +118,13 @@ public class Tablero extends JFrame {
 		boolean posiblidadGanar = false;
 		int i;
 		
-		for (i = 0; i < nro_casillas9; i ++) {
+		for (i = 0; i < NUM_CASILLAS_9; i ++) {
 			
 			if (arrayCasillas[i].getValor() == null) {
 				
-				arrayCasillas[i].setValor(fichaO);
+				arrayCasillas[i].setValor(FICHAO);
 				
-				posiblidadGanar = CheckGanador.check_tresRaya(fichaO);
+				posiblidadGanar = CheckGanador.check_tresRaya(FICHAO);
 				
 				if (posiblidadGanar) {
 					break;
@@ -140,13 +142,13 @@ public class Tablero extends JFrame {
 		
 		if (!posiblidadGanar) {
 			
-			for (i = 0; i < nro_casillas9; i ++) {
+			for (i = 0; i < NUM_CASILLAS_9; i ++) {
 				
 				if (arrayCasillas[i].getValor() == null) {
 					
-					arrayCasillas[i].setValor(fichaX);
+					arrayCasillas[i].setValor(FICHAX);
 					
-					defender = CheckGanador.check_tresRaya(fichaX);
+					defender = CheckGanador.check_tresRaya(FICHAX);
 					
 					if (defender) {
 						arrayCasillas[i].setValor(null);
@@ -170,20 +172,18 @@ public class Tablero extends JFrame {
 		}
 		
 		// ---------------------------------------------------------------
-		// LLegados hasta aqui, ya tenemos RESUELTO "numero_rnd"
+		// 	LLegados hasta aqui, ya tenemos RESUELTO "numero_rnd"
 		// ---------------------------------------------------------------
 		CasillaXO tiradaCpu = arrayCasillas[numero_rnd];
-		panel.remove(tiradaCpu.getCasillaBoton());
 		
-		arrayCasillas[numero_rnd] = new CasillaXO(fichaO, numero_rnd, getFila(numero_rnd), getColumna(numero_rnd));
-		
-		panel.add(arrayCasillas[numero_rnd].getCasillaBoton());
-		panel.repaint();
+		// Repintar Casilla y poner la CPU (ficha O)
+		RepaintNuevaXO.clickNuevaXO(FICHAO, panel, arrayCasillas, numero_rnd,
+				getFila(numero_rnd), getColumna(numero_rnd));
 		
 		System.out.print(numero_rnd + " jugada realizada... \n");
 		
 		boolean empate = CheckGanador.check_empate();
-		boolean tresRaya = CheckGanador.check_tresRaya(fichaO);
+		boolean tresRaya = CheckGanador.check_tresRaya(FICHAO);
 		
 		if (!empate && !tresRaya) {
 			turno = true;
@@ -191,6 +191,7 @@ public class Tablero extends JFrame {
 		} else {
 			enJuego = false;
 			GameOver gameover = new GameOver(empate, tresRaya, false);
+			gameover.setVisible(true);
 			//GameOver.game_over(empate, tresRaya);
 		}
 	}
@@ -198,14 +199,14 @@ public class Tablero extends JFrame {
 	// Getters & Setters
 	public static int getFila(int indice) {
 		
-		int fila = (int) (indice / filas);
+		int fila = (int) (indice / FILAS);
 		return fila;
 	}
 	
 	public static int getColumna(int indice) {
 		
-		int columna = (int) (indice / filas);
-		columna = indice - (columna * columnas);
+		int columna = (int) (indice / FILAS);
+		columna = indice - (columna * COLUMNAS);
 		return columna;
 	}
 	

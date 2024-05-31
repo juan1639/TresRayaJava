@@ -1,4 +1,7 @@
-package packMain;
+package juan1639.checkwinner;
+
+import juan1639.entidades.CasillaXO;
+import juan1639.logicajuego.Tablero;
 
 public class CheckGanador {
 	
